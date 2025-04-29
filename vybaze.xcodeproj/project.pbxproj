@@ -29,20 +29,43 @@
 		1E5F28F52DB54BD20005B8FF /* vybazeUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = vybazeUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		1EFE9CCD2DBD74CA00973ADB /* Exceptions for "vybaze" folder in "vybaze" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+				Tests/vybazeTests.swift,
+				Tests/vybazeUITests.swift,
+				Tests/vybazeUITestsLaunchTests.swift,
+			);
+			target = 1E5F28DD2DB54BD10005B8FF /* vybaze */;
+		};
+		1EFE9CCE2DBD74CA00973ADB /* Exceptions for "vybaze" folder in "vybazeTests" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Tests/vybazeTests.swift,
+			);
+			target = 1E5F28EA2DB54BD20005B8FF /* vybazeTests */;
+		};
+		1EFE9CCF2DBD74D300973ADB /* Exceptions for "vybaze" folder in "vybazeUITests" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Tests/vybazeUITests.swift,
+				Tests/vybazeUITestsLaunchTests.swift,
+			);
+			target = 1E5F28F42DB54BD20005B8FF /* vybazeUITests */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		1E5F28E02DB54BD10005B8FF /* vybaze */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				1EFE9CCD2DBD74CA00973ADB /* Exceptions for "vybaze" folder in "vybaze" target */,
+				1EFE9CCE2DBD74CA00973ADB /* Exceptions for "vybaze" folder in "vybazeTests" target */,
+				1EFE9CCF2DBD74D300973ADB /* Exceptions for "vybaze" folder in "vybazeUITests" target */,
+			);
 			path = vybaze;
-			sourceTree = "<group>";
-		};
-		1E5F28EE2DB54BD20005B8FF /* vybazeTests */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			path = vybazeTests;
-			sourceTree = "<group>";
-		};
-		1E5F28F82DB54BD20005B8FF /* vybazeUITests */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			path = vybazeUITests;
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
@@ -76,8 +99,6 @@
 			isa = PBXGroup;
 			children = (
 				1E5F28E02DB54BD10005B8FF /* vybaze */,
-				1E5F28EE2DB54BD20005B8FF /* vybazeTests */,
-				1E5F28F82DB54BD20005B8FF /* vybazeUITests */,
 				1E5F28DF2DB54BD10005B8FF /* Products */,
 			);
 			sourceTree = "<group>";
@@ -130,9 +151,6 @@
 			dependencies = (
 				1E5F28ED2DB54BD20005B8FF /* PBXTargetDependency */,
 			);
-			fileSystemSynchronizedGroups = (
-				1E5F28EE2DB54BD20005B8FF /* vybazeTests */,
-			);
 			name = vybazeTests;
 			packageProductDependencies = (
 			);
@@ -152,9 +170,6 @@
 			);
 			dependencies = (
 				1E5F28F72DB54BD20005B8FF /* PBXTargetDependency */,
-			);
-			fileSystemSynchronizedGroups = (
-				1E5F28F82DB54BD20005B8FF /* vybazeUITests */,
 			);
 			name = vybazeUITests;
 			packageProductDependencies = (
@@ -395,11 +410,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = VCW7FU3N47;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = vybaze/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -423,11 +440,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = VCW7FU3N47;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = vybaze/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

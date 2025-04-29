@@ -2,7 +2,7 @@ import SwiftUI
 
 struct WelcomeView: View {
     
-    @State var colorModel: ColorModel = ColorModel()
+    var colorModel: ColorModel = ColorModel()
     @State var showAuthSheet: Bool = false
     
     @State private var animateLogo = false
@@ -16,19 +16,19 @@ struct WelcomeView: View {
                     .resizable()
                     .scaledToFill()
                     .frame(width: 100, height: 100)
-                    .scaleEffect(animateLogo ? 1.05 : 0.9)
+                    .scaleEffect(animateLogo ? 1.07 : 0.9)
                     .shadow(color: colorModel.primaryColor.opacity(0.5), radius: 12)
                     .animation(.easeInOut(duration: 1.5).repeatForever(autoreverses: true), value: animateLogo)
                 
                 Text("Good Morning")
-                    .font(.title)
+                    .font(.appTitle)
                     .bold()
                     .opacity(animateContent ? 1 : 0)
                     .offset(y: animateContent ? 0 : 20)
                     .animation(.easeOut(duration: 1).delay(0.3), value: animateContent)
                 
-                Text("Join a vibrant space made for artists, producers & music lovers.\nCreate. Share. Get Feedback.\nEvolve your sound")
-                    .font(.headline)
+                Text("Join a vibrant space made for artists, producers & music lovers.\nYour Vibe. Your Sound. Perfected.")
+                    .font(.appHeadline)
                     .fontWeight(.medium)
                     .multilineTextAlignment(.center)
                     .opacity(animateContent ? 1 : 0)
@@ -53,7 +53,8 @@ struct WelcomeView: View {
                     UIApplication.shared.open(url)
                 }
             }
-            .font(.headline)
+            .font(.appBody)
+            .bold()
             .foregroundStyle(colorModel.primaryColor)
             .multilineTextAlignment(.center)
             .opacity(animateButton ? 1 : 0)

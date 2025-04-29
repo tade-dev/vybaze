@@ -44,11 +44,10 @@ struct FeedbackResultW: View {
             
             VStack(alignment: .leading) {
                 Text("Reflections")
-                    .font(.title3)
+                    .font(.appHeadline)
                     .fontWeight(.semibold)
                 Text("Reverb Zn")
-                    .font(.headline)
-                    .fontWeight(.regular)
+                    .font(.appBody)
                     .foregroundStyle(.gray)
             }
             

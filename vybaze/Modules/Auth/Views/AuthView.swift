@@ -9,10 +9,9 @@ import SwiftUI
 
 struct AuthView: View {
     
-    @State var colorModel: ColorModel = ColorModel()
+    var colorModel: ColorModel = ColorModel()
     @Environment(\.presentationMode) var presentationMode
-    @State var emailText: String = ""
-    @State var passwordText: String = ""
+    @StateObject var authViewModel = AuthViewModel()
     
     var body: some View {
         ScrollView {
@@ -26,14 +25,15 @@ struct AuthView: View {
             .padding(.vertical, 20)
             
             Text("Log in or Sign up")
-                .font(.title)
+                .font(.appTitle)
                 .bold()
+                .padding(.bottom, 10)
             
-            AuthInput(text: $emailText, placeHolder: "Enter email")
+            AuthInput(text: $authViewModel.emailText, placeHolder: "Enter email", label: "Email")
                 .padding(.bottom, 5)
             
-            AuthInput(text: $passwordText, placeHolder: "Enter password", isPasswordField: true)
-                .padding(.bottom, 10)
+            AuthInput(text: $authViewModel.passwordText, placeHolder: "Enter password", label: "Password", isPasswordField: true)
+                .padding(.bottom, 20)
             
             AppBtn(text: "Continue") {
                 

@@ -9,9 +9,8 @@ import SwiftUI
 
 struct HomeView: View {
     
-    @State var colorModel: ColorModel = ColorModel()
-    @State var isNavigationLinkActive: Bool = false
-    @State var showSheet: Bool = false
+    var colorModel: ColorModel = ColorModel()
+    @EnvironmentObject var dashboardViewModel: DashboardViewModel
     
     var body: some View {
         NavigationView {
@@ -21,7 +20,7 @@ struct HomeView: View {
                 
                 Section {
                     ForEach(0..<3) { index in
-                        FeedbackTile(isNavigationLinkActive: $isNavigationLinkActive, details: "Active", colorModel: colorModel)
+                        FeedbackTile(isNavigationLinkActive: $dashboardViewModel.isNavigationLinkActive, details: "Active", colorModel: colorModel)
                     }
                 } header: {
                     Text("Recent Feedbacks")
@@ -47,4 +46,5 @@ struct HomeView: View {
 
 #Preview {
     HomeView()
+        .environmentObject(DashboardViewModel())
 }

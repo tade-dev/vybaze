@@ -10,9 +10,9 @@ import SwiftUI
 struct ProfileView: View {
     
     
-    @State var isToggleOn: Bool = false
-    var colorModel: ColorModel = ColorModel()
+    @State var isFeedbackUpdateOn: Bool = false
     @State var showPremiumPopUp: Bool = false
+    var colorModel: ColorModel = ColorModel()
     
     
     var body: some View {
@@ -20,31 +20,30 @@ struct ProfileView: View {
             ZStack(alignment: .bottom) {
                 List(content: {
                     Section {
+                        
                         profileTile
                         
                         Button(action: {
-                            withAnimation(.spring(
-                                response: 0.4,
-                                dampingFraction: 0.5,
-                                blendDuration: 0.8
-                            )) {
-                                showPremiumPopUp = true
-                            }
+                            showPremiumPopUp.toggle()
                         }) {
                             Text("Upgrade to Vybaze Premium")
                                 .foregroundStyle(colorModel.primaryColor)
                                 .font(.headline)
                                 .fontWeight(.medium)
                         }
+                        .sheet(isPresented: $showPremiumPopUp) {
+                            VybazePremiumView()
+                        }
+                        
                         Text("Restore Purchase")
                             .font(.headline)
                             .fontWeight(.medium)
                     } header: {
                         Text("Account")
                     }
-                    
+
                     Section {
-                        Toggle(isOn: $isToggleOn) {
+                        Toggle(isOn: $isFeedbackUpdateOn) {
                             Text("Feedback Updates")
                         }
                         .tint(colorModel.primaryColor)
@@ -52,30 +51,27 @@ struct ProfileView: View {
                         Text("Notifications")
                     }
                     
-                    Section {
-                        NavigationLink(destination: {
-                            
+                    Section() {
+                        Button(action: {
+                            if let url = URL(string: "https://preview--vybaze-song-alchemy-hub.lovable.app/terms") {
+                                UIApplication.shared.open(url)
+                            }
                         }) {
                             Text("Legal")
                         }
-                        NavigationLink(destination: {
-                            
+                        Button(action: {
+                            if let url = URL(string: "https://preview--vybaze-song-alchemy-hub.lovable.app/privacy") {
+                                UIApplication.shared.open(url)
+                            }
                         }) {
                             Text("Privacy Policy")
                         }
                         Text("App Version")
                             .badge("1.0")
                     } header: {
-                        Text("Notifications")
+                        Text("General")
                     }
-                    
                 })
-                
-                if showPremiumPopUp {
-                    PremiumSheet(showPremiumPopUp: $showPremiumPopUp)
-                        .transition(.asymmetric(insertion: .move(edge: .bottom), removal: .move(edge: .bottom)))
-                }
-                
             }
             .navigationTitle("Settings")
         }
@@ -83,13 +79,24 @@ struct ProfileView: View {
     
     var profileTile: some View {
         NavigationLink(destination: {
-            
+            EditProfileView()
         }) {
             HStack {
-                Circle()
-                    .fill(.pink)
+                AsyncImage(url: URL(string: "https://picsum.photos/200"), content: { image in
+                    
+                    image
+                        .resizable()
+                        .frame(width: 50, height: 50)
+                        .clipped()
+                        .clipShape(.circle)
+                    
+                }, placeholder: {
+                    ProgressView()
+                })
+                
                     .frame(width: 50, height: 50)
-                    .padding(.trailing, 5)
+                    .clipped()
+                    .clipShape(.circle)
                 
                 VStack(alignment: .leading) {
                     Text("Akintade Oluwaseun")
@@ -109,76 +116,4 @@ struct ProfileView: View {
 
 #Preview {
     ProfileView()
-}
-
-struct PremiumSheet: View {
-    
-    @Binding var showPremiumPopUp: Bool
-    var colorModel: ColorModel = ColorModel()
-    
-    var body: some View {
-        VStack(alignment: .leading, spacing: 5) {
-            
-            VStack(alignment: .leading, spacing: 8) {
-                Text("Vybaze Premium")
-                    .font(.title)
-                    .bold()
-                Text("Get unlimited feedback generations")
-                Text("1-month free trial")
-                    .foregroundStyle(colorModel.primaryColor)
-            }
-            
-            VStack(alignment: .leading) {
-                Text("Monthly")
-                    .font(.title2)
-                    .fontWeight(.medium)
-                
-                Text("$9.99 per month")
-                    .font(.headline)
-                    .fontWeight(.regular)
-                    .foregroundStyle(.gray)
-            }
-            .frame(maxWidth: .infinity, alignment: .leading)
-            .padding()
-            .background(
-                RoundedRectangle(cornerRadius: 10)
-                    .stroke(style: StrokeStyle(lineWidth: 1))
-            )
-            .padding(.top)
-            .padding(.bottom)
-            
-            VStack(alignment: .leading) {
-                Text("Monthly")
-                    .font(.title2)
-                    .fontWeight(.medium)
-                
-                Text("$9.99 per month")
-                    .font(.headline)
-                    .fontWeight(.regular)
-                    .foregroundStyle(.gray)
-            }
-            .frame(maxWidth: .infinity, alignment: .leading)
-            .padding()
-            .background(
-                RoundedRectangle(cornerRadius: 10)
-                    .stroke(style: StrokeStyle(lineWidth: 1))
-            )
-            .padding(.bottom, 20)
-            
-            Text("Cancel")
-                .foregroundStyle(.blue)
-                .frame(maxWidth: .infinity, alignment: .center)
-                .onTapGesture {
-                    showPremiumPopUp = false
-                }
-        }
-        .padding(.vertical, 30)
-        .padding(.horizontal, 40)
-        .background(
-            RoundedRectangle(cornerRadius: 20)
-                .fill(.white)
-                .frame(width: UIScreen.main.bounds.width * 0.9)
-        )
-        .ignoresSafeArea()
-    }
 }

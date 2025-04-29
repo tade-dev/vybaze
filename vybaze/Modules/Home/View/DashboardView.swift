@@ -9,18 +9,18 @@ import SwiftUI
 
 struct DashboardView: View {
     
-    @State var selectedTab: Int = 0
     @State var colorModel: ColorModel = ColorModel()
+    @EnvironmentObject var dashboardViewModel: DashboardViewModel
     
     var body: some View {
-        TabView(selection: $selectedTab) {
+        TabView(selection: $dashboardViewModel.selectedTab) {
             WelcomeView()
                 .tabItem {
                     VStack {
                         Image(systemName: "house.circle")
                         Text("Home")
                     }
-                }
+                }.tag(0)
             
             FeedbackView()
                 .tabItem {
@@ -28,7 +28,7 @@ struct DashboardView: View {
                         Image(systemName: "tv.music.note")
                         Text("Feedbacks")
                     }
-                }
+                }.tag(1)
             
             ProfileView()
                 .tabItem {
@@ -36,7 +36,7 @@ struct DashboardView: View {
                         Image(systemName: "gear")
                         Text("Settings")
                     }
-                }
+                }.tag(2)
                 
         }
         .accentColor(colorModel.primaryColor)
@@ -45,4 +45,6 @@ struct DashboardView: View {
 
 #Preview {
     DashboardView()
+        .environmentObject(DashboardViewModel())
+        .environmentObject(FeedbackViewModel())
 }

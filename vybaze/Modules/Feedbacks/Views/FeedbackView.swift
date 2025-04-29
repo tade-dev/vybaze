@@ -9,30 +9,27 @@ import SwiftUI
 
 struct FeedbackView: View {
     
-    @State var colorModel: ColorModel = ColorModel()
-    @State var showSheet: Bool = false
-    @State var isNavigationLinkActive: Bool = false
-    @State var searchText: String = ""
+    var colorModel: ColorModel = ColorModel()
+    @EnvironmentObject var feedbackViewModel: FeedbackViewModel
     
     var body: some View {
         NavigationView {
             List(content: {
                 Section {
                     ForEach(0..<5) { index in
-                        FeedbackTile(isNavigationLinkActive: $isNavigationLinkActive, details: "Index \(index)")
+                        FeedbackTile(isNavigationLinkActive: $feedbackViewModel.isNavigationLinkActive, details: "Index \(index)")
                     }
                 } header: {
                     Text("2022-05-10")
-                        .font(.title2)
+                        .font(.mediumFont(size: 18))
                         .bold()
                         .foregroundStyle(colorModel.textColor)
                 }
-
             })
             .listStyle(.plain)
             .navigationTitle("Feedbacks")
             .searchable(
-                text: $searchText,
+                text: $feedbackViewModel.searchText,
                 placement: .navigationBarDrawer(displayMode: .always),
                 prompt: "Search songs..."
             )
@@ -41,7 +38,7 @@ struct FeedbackView: View {
             )
             .safeAreaInset(
                 edge: .bottom) {
-                    FTA(showSheet: $showSheet, colorModel: colorModel)
+                    FTA(showSheet: $feedbackViewModel.showSheet, colorModel: colorModel)
                 }
         }
     }
@@ -49,4 +46,5 @@ struct FeedbackView: View {
 
 #Preview {
     FeedbackView()
+        .environmentObject(FeedbackViewModel())
 }

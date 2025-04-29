@@ -25,28 +25,26 @@ struct LatestFeedbackW: View {
                     
                     if isHomeView {
                         Text("Latest Feedback")
-                            .font(.title3)
+                            .font(.boldFont(size: 23))
                             .fontWeight(.semibold)
                             .foregroundStyle(colorModel.textColor)
                             .padding(.bottom, 2)
                         
                         VStack(alignment: .leading) {
                             Text("Clarity: High")
-                                .font(.title3)
-                                .foregroundStyle(colorModel.textColor)
                             Text("Energy: Good")
-                                .font(.title3)
-                                .foregroundStyle(colorModel.textColor)
                         }
+                        .font(.mediumFont(size: 20))
+                        .foregroundStyle(colorModel.textColor)
                     }else {
                         Text(songTitle ?? "")
-                            .font(.title)
+                            .font(.appTitle)
                             .fontWeight(.semibold)
                             .foregroundStyle(colorModel.textColor)
                             .padding(.bottom, 2)
                         
                         Text(artistName ?? "")
-                            .font(.title2)
+                            .font(.boldFont(size: 25))
                             .foregroundStyle(colorModel.textColor)
                     }
                     

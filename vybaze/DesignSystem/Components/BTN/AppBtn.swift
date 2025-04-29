@@ -20,7 +20,8 @@ struct AppBtn: View {
     
     var body: some View {
         Text(text)
-            .font(.headline)
+            .font(.appBody)
+            .bold()
             .foregroundStyle(.white)
             .frame(maxWidth: .infinity)
             .frame(height: height ?? 50)
@@ -49,10 +50,11 @@ struct SocialBtn: View {
                 .frame(width: 20, height: 20)
                 .scaledToFill()
             Text(text)
-                .font(.headline)
+                .font(.appBody)
+                .bold()
                 .foregroundStyle(colorModel.textColor)
         })
-            .font(.headline)
+            .font(.appHeadline)
             .foregroundStyle(.white)
             .frame(maxWidth: .infinity)
             .frame(height: height ?? 50)
