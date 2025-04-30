@@ -25,6 +25,7 @@ struct FeedbackView: View {
                         .bold()
                         .foregroundStyle(colorModel.textColor)
                 }
+                .listRowSeparator(.hidden)
             })
             .listStyle(.plain)
             .navigationTitle("Feedbacks")

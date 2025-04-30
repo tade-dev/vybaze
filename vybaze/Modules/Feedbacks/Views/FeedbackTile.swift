@@ -17,25 +17,19 @@ struct FeedbackTile: View {
         Button {
             isNavigationLinkActive.toggle()
         } label: {
-            HStack(spacing: 20) {
-                Image(systemName: "music.note")
-                    .foregroundStyle(colorModel.primaryColor)
-                    .font(.headline)
-                    .background(
-                        RoundedRectangle(cornerRadius: 10)
-                            .fill(colorModel.primaryColor.opacity(0.3))
-                            .opacity(0.1)
-                            .frame(width: 40, height: 40)
-                    )
-                    .padding(.horizontal, 10)
-                VStack(alignment: .leading) {
+            HStack() {
+                
+                cacheImage(url: "https://picsum.photos/200")
+                
+                VStack(alignment: .leading, spacing: 8) {
                     Text("Toxic Love")
                         .font(.appHeadline)
                         .foregroundStyle(colorModel.textColor)
-                    Text("4 min")
+                    Text("Cole Thomson")
                         .font(.regularFont(size: 14))
                         .foregroundStyle(.gray)
                 }
+                .padding(.leading, 20)
                 Spacer()
                 Text("83%")
                     .foregroundStyle(colorModel.primaryColor)
@@ -47,9 +41,8 @@ struct FeedbackTile: View {
                             .fill(colorModel.primaryColor)
                             .opacity(0.1)
                     )
-                    .padding(.horizontal, 10)
-                
             }
+            .padding(.horizontal, 20)
             .padding(.vertical, 5)
         }
         .sheet(isPresented: $isNavigationLinkActive) {

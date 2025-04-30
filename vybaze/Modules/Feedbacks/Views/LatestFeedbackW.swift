@@ -10,7 +10,7 @@ import SwiftUI
 struct LatestFeedbackW: View {
     
     @State var showSheet: Bool = false
-    var colorModel: ColorModel
+    var colorModel: ColorModel = ColorModel()
     var progress: Double
     var isHomeView: Bool
     var songTitle: String?
@@ -18,21 +18,28 @@ struct LatestFeedbackW: View {
     
     var body: some View {
         VStack(spacing: isHomeView ? 30 : 20) {
-            HStack {
-                CircularProgressView(progress: progress)
-                Spacer()
+            HStack(spacing: 0) {
                 VStack(alignment: .leading) {
                     
                     if isHomeView {
                         Text("Latest Feedback")
-                            .font(.boldFont(size: 23))
+                            .font(.appHeadline)
                             .fontWeight(.semibold)
-                            .foregroundStyle(colorModel.textColor)
-                            .padding(.bottom, 2)
+                            .foregroundStyle(.gray)
+                            .padding(.bottom, 5)
                         
-                        VStack(alignment: .leading) {
-                            Text("Clarity: High")
-                            Text("Energy: Good")
+                        VStack(alignment: .leading, spacing: 10) {
+                            Text("Lost in the Groove")
+                                .font(.title2)
+                                .dynamicTypeSize(...DynamicTypeSize.medium)
+                                .fontWeight(.bold)
+                            Group {
+                                Text("Cody Moore")
+                                Text("1hr ago")
+                            }
+                            .foregroundStyle(.gray)
+                            .font(.appBody)
+                            .fontWeight(.medium)
                         }
                         .font(.mediumFont(size: 20))
                         .foregroundStyle(colorModel.textColor)
@@ -50,8 +57,9 @@ struct LatestFeedbackW: View {
                     
                     
                 }
+                Spacer()
+                CircularProgressView(progress: progress)
             }
-            .padding(.horizontal, 20)
             if isHomeView {
                 AppBtn(text: "Generate New Feedback") {
                     showSheet.toggle()
@@ -61,6 +69,15 @@ struct LatestFeedbackW: View {
                 }
             }
         }
-        .padding(.vertical, 20)
+        .padding(.horizontal, 20)
+        .padding(.vertical, 30)
+        .background(
+            RoundedRectangle(cornerRadius: 20)
+                .foregroundStyle(.gray.opacity(0.1))
+        )
     }
+}
+
+#Preview {
+    LatestFeedbackW(progress: 0.5, isHomeView: true, songTitle: "Active", artistName: "Neno")
 }

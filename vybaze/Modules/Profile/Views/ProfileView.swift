@@ -40,6 +40,7 @@ struct ProfileView: View {
                             .fontWeight(.medium)
                     } header: {
                         Text("Account")
+                            .textCase(.none)
                     }
 
                     Section {
@@ -49,6 +50,7 @@ struct ProfileView: View {
                         .tint(colorModel.primaryColor)
                     } header: {
                         Text("Notifications")
+                            .textCase(.none)
                     }
                     
                     Section() {
@@ -70,6 +72,7 @@ struct ProfileView: View {
                             .badge("1.0")
                     } header: {
                         Text("General")
+                            .textCase(.none)
                     }
                 })
             }

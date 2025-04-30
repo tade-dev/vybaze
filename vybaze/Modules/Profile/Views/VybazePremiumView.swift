@@ -44,11 +44,17 @@ struct VybazePremiumView: View {
                     .animation(.easeOut(duration: 0.6).delay(0.3), value: animate)
                 
                 VStack(alignment: .leading, spacing: 20) {
+                    
                     buildPremiumTile(icon: "music", title: "Unlimited Feedbacks", desc: "Upload unlimited tracks and get detailed AI feedback anytime")
                     
                     buildPremiumTile(icon: "rocket", title: "Priority Processing", desc: "Your tracks get processed and analyzed faster than free users")
                     
-                    buildPremiumTile(icon: "google-docs", title: "Feedback History Access", desc: "Regenerate and compare your past feedbacks overtime")
+                    buildPremiumTile(icon: "google-docs", title: "Full Feedback History", desc: "Regenerate and compare your past feedbacks overtime")
+                    
+                    buildPremiumTile(icon: "pie-chart", title: "Advanced Insights and Breakdown", desc: "Unlock deeper insights on vocals, mixing, arrangement, and emotional tone.")
+
+                    buildPremiumTile(icon: "sparkling", title: "Early Access to New Features", desc: "Be the first to try out upcoming tools and experimental AI models before public release.")
+
                 }
                 .padding(.bottom, 10)
                 .opacity(animate ? 1 : 0)
@@ -98,4 +104,8 @@ struct VybazePremiumView: View {
         }
         .padding(.horizontal, 20)
     }
+}
+
+#Preview {
+    VybazePremiumView()
 }

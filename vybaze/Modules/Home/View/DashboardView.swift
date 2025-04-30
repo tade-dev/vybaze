@@ -14,7 +14,7 @@ struct DashboardView: View {
     
     var body: some View {
         TabView(selection: $dashboardViewModel.selectedTab) {
-            WelcomeView()
+            HomeView()
                 .tabItem {
                     VStack {
                         Image(systemName: "house.circle")
