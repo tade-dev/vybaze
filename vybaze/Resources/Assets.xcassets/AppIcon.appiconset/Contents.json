@@ -1,7 +1,7 @@
 {
   "images" : [
     {
-      "filename" : "Group 381.png",
+      "filename" : "vybaze_icon_white_bg_1024.png",
       "idiom" : "universal",
       "platform" : "ios",
       "size" : "1024x1024"
@@ -13,7 +13,7 @@
           "value" : "dark"
         }
       ],
-      "filename" : "Group 382.png",
+      "filename" : "vybaze_icon_white_bg_1024 1.png",
       "idiom" : "universal",
       "platform" : "ios",
       "size" : "1024x1024"
@@ -25,7 +25,7 @@
           "value" : "tinted"
         }
       ],
-      "filename" : "Group 383.png",
+      "filename" : "vybaze_icon_white_bg_1024 2.png",
       "idiom" : "universal",
       "platform" : "ios",
       "size" : "1024x1024"

@@ -11,6 +11,7 @@ struct DashboardView: View {
     
     @State var colorModel: ColorModel = ColorModel()
     @EnvironmentObject var dashboardViewModel: DashboardViewModel
+    @State var showOnboarding: Bool = false
     
     var body: some View {
         TabView(selection: $dashboardViewModel.selectedTab) {
@@ -40,6 +41,12 @@ struct DashboardView: View {
                 
         }
         .accentColor(colorModel.primaryColor)
+        .fullScreenCover(isPresented: $showOnboarding, content: {
+            OnboardingView(showOnboarding: $showOnboarding)
+        })
+        .onAppear {
+            showOnboarding = true
+        }
     }
 }
 

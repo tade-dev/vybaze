@@ -21,6 +21,7 @@ struct FeedbackTile: View {
                 
                 cacheImage(url: "https://picsum.photos/200")
                 
+                
                 VStack(alignment: .leading, spacing: 8) {
                     Text("Toxic Love")
                         .font(.appHeadline)
@@ -29,7 +30,7 @@ struct FeedbackTile: View {
                         .font(.regularFont(size: 14))
                         .foregroundStyle(.gray)
                 }
-                .padding(.leading, 20)
+                .padding(.leading, 10)
                 Spacer()
                 Text("83%")
                     .foregroundStyle(colorModel.primaryColor)
@@ -42,8 +43,6 @@ struct FeedbackTile: View {
                             .opacity(0.1)
                     )
             }
-            .padding(.horizontal, 20)
-            .padding(.vertical, 5)
         }
         .sheet(isPresented: $isNavigationLinkActive) {
             AIFeedbackView()

@@ -19,6 +19,8 @@ func cacheImage(
         case .success(let image):
             image
                 .resizable()
+                .frame(width: 50, height: 50)
+                .cornerRadius(5)
         case .failure(_):
             Image(systemName: "questionmark.circle")
         @unknown default:
