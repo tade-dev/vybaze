@@ -28,7 +28,7 @@ struct FeedbackResultW: View {
                     image
                         .resizable()
                         .frame(width: 100, height: 100)
-                        .cornerRadius(20)
+                        .cornerRadius(10)
                     
                 case .failure(_):
                     Image(systemName: "photo")

@@ -16,65 +16,47 @@ struct AIFeedbackView: View {
     var body: some View {
         
         NavigationView {
-            ScrollView {
-                VStack(alignment: .leading, content: {
+            ScrollView(showsIndicators: false) {
+                VStack(alignment: .leading, spacing: 10 ,content: {
                     
                     FeedbackResultW(
                         imageUrl: imageUrl,
                         progress: 0.86,
                         colorModel: colorModel
                     )
-                    
-                    VStack(alignment: .leading) {
-                        Text("Here is what we think about your track!")
-                            .padding(.top, 10)
-                            .font(.mediumFont(size: 18))
-                        Text("Our AI analyzed your music across multiple dimensions")
-                            .font(.mediumFont(size: 16))
-                    }
-                    .foregroundStyle(.gray)
-                    .font(.headline)
                     .padding(.bottom, 20)
                     
                     ResultTile(
-                        icon:"microphone",
-                        title: "Vocals",
+                        title: "Vocal Performance",
                         description: "Vocals are strong, but need better mixing in high frequencies.",
-                        point: 7.9
+                        point: 78
                     )
                     
                     ResultTile(
-                        icon:"slider.horizontal.3",
                         title: "Production Quality",
                         description: "Polished and professional sounds.",
-                        point: 10
+                        point: 49
                     )
 
                     ResultTile(
-                        icon:"music.note",
-                        title: "Melody / Composition",
+                        title: "Lyrics & Structure",
                         description: "Melody is catchy, but could be further developed.",
-                        point: 7.3
+                        point: 59
                     )
 
                     ResultTile(
-                        icon:"waveform",
-                        title: "Mix & Master",
-                        description: "Mix is decent; try enhancing bass and treble.",
-                        point: 7.9
-                    )
-                    
-                    ResultTile(
-                        icon:"chart.line.uptrend.xyaxis",
                         title: "Commercial Appeal",
-                        description: "Track has good potential for mainstream success.",
-                        point: 8.3
+                        description: "Mix is decent; try enhancing bass and treble.",
+                        point: 99
                     )
                     
-                    AppBtn(text: "Generate New Feedback") {
-                        
-                    }
-                    .padding(.top, 20)
+                    suggestions(suggestions: [
+                        FeedbackSuggestions(title: "Consider adding more dynamic range to your chorus"),
+                        FeedbackSuggestions(title: "Work on vocal control during the bridge section"),
+                        FeedbackSuggestions(title: "Add more bass presence in the mix"),
+                    ])
+                    
+                    genre()
 
                 })
                 .padding(.horizontal, 20)
@@ -86,8 +68,73 @@ struct AIFeedbackView: View {
                 )
                 .navigationTitle("Feedback Results")
             }
+            .safeAreaInset(edge: .bottom) {
+                AppBtn(text: "Generate New Feedback") {
+                    
+                }
+                .padding(.horizontal, 20)
+            }
         }
     }
+    
+    func suggestions(suggestions: [FeedbackSuggestions]) -> some View {
+        ZStack {
+            RoundedRectangle(cornerRadius: 10)
+                .fill(Color("PrimaryColor").opacity(0.1))
+            
+            VStack(alignment: .leading, spacing: 10) {
+                Text("Improvement Suggestions")
+                    .font(.appHeadline)
+                Group {
+                    ForEach(suggestions) { suggestion in
+                        HStack(alignment: .center, spacing: 10) {
+                            Circle()
+                                .fill(Color("PrimaryColor"))
+                                .frame(width: 5, height: 5)
+                            Text(suggestion.title)
+                                .font(.appBody)
+                        }
+                    }
+                }
+            }
+            .padding(.horizontal)
+            .padding(.vertical, 15)
+        }
+        .padding(.bottom, 10)
+        .padding(.top, 10)
+    }
+    
+    func genre() -> some View {
+        ZStack(alignment: .leading) {
+            RoundedRectangle(cornerRadius: 10)
+                .fill(Color.secondary.opacity(0.1))
+            
+            VStack(alignment: .leading, spacing: 10) {
+                
+                Text("Genre Classification")
+                    .font(.appHeadline)
+                + Text(" Pop/R&B (94% confidence)")
+                    .foregroundStyle(Color("PrimaryColor"))
+                    .font(.appBody)
+                
+                Group {
+                    ForEach(0..<3) { index in
+                        ResultTile(
+                            icon: "volume",
+                            title: "Pop/R&B",
+                            description: nil,
+                            point: 56
+                        )
+                        .padding(.bottom)
+                    }
+                }
+            }
+            .padding(.horizontal)
+            .padding(.vertical, 15)
+        }
+        .padding(.bottom, 10)
+    }
+    
 }
 
 #Preview {
@@ -96,40 +143,42 @@ struct AIFeedbackView: View {
 
 struct ResultTile: View {
     
-    var icon: String
+    var icon: String?
     var title: String
-    var description: String
+    var description: String?
     var point: Double
     var colorModel: ColorModel = ColorModel()
     
     var body: some View {
-        HStack(alignment: .top, spacing: 15) {
-            
-            RoundedRectangle(cornerRadius: 10)
-                .fill(colorModel.primaryColor)
-                .frame(width: 50, height: 50)
-                .overlay {
-                    Image(systemName: icon)
-                        .font(.title2)
-                        .foregroundStyle(.white)
-                }
-            
-            VStack(alignment: .leading) {
-                HStack {
+        VStack(alignment: .leading) {
+            HStack {
+                HStack(spacing: 10) {
+                    if let icon {
+                        Image(icon)
+                            .resizable()
+                            .frame(width: 20, height: 20)
+                    }
                     Text(title)
                         .font(.appHeadline)
                         .fontWeight(.medium)
-                    Spacer()
-                    Text(String(format: "%.1f", point))
-                        .font(.appHeadline)
-                        .fontWeight(.medium) + Text(" /10").foregroundStyle(.gray).font(.appBody)
                 }
-                Text(description)
+                Spacer()
+                Text("\(String(format: "%.0f", point))%")
+                    .font(.appHeadline)
+                    .fontWeight(.medium)
+            }
+            
+            CustomLinearProgressView(
+                progress: 0.3,
+                foregroundColor: Color("PrimaryColor")
+            )
+            
+            if let desc = description {
+                Text(desc)
                     .font(.appBody)
                     .fontWeight(.regular)
                     .foregroundStyle(.gray)
             }
-            
         }
     }
 }
