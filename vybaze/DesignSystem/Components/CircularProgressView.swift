@@ -7,8 +7,6 @@
 
 import SwiftUI
 
-import SwiftUI
-
 struct CircularProgressView: View {
     var progress: Double
     @State var colorModel: ColorModel = ColorModel()

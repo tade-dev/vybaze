@@ -15,47 +15,24 @@ struct GenerateNewFeedback: View {
     
     var body: some View {
         NavigationView {
-            ScrollView {
-                VStack(alignment: .leading) {
+            
+            VStack(spacing: 16) {
+                
+                pickerView
+                
+                Form {
                     
-                    Text("Lets hear your latest track!")
-                        .font(.appHeadline)
-                        .foregroundStyle(.gray)
-                        .padding(.bottom)
-                    
-                    buildUploadSong
-                    
-                    TextField("Song title", text: $feedbackViewModel.songTitle)
-                        .padding()
-                        .background(RoundedRectangle(cornerRadius: 8).stroke(Color.gray.opacity(0.5)))
-                        .padding(.bottom, 10)
-                        .padding(.top, 20)
-                    
-                    TextField("Artist name", text: $feedbackViewModel.artistName)
-                        .padding()
-                        .background(RoundedRectangle(cornerRadius: 8).stroke(Color.gray.opacity(0.5)))
-                        .padding(.bottom, 10)
-                    
-                    PickerTextField(selected: $feedbackViewModel.genre, options: feedbackViewModel.genreList, label: "Select genre")
-                        .padding(.bottom, 30)
-                    
-                    AppBtn(text: "Generate Feedback") {
-                        
+                    TextField("Song Title", text: $feedbackViewModel.songTitle)
+                    TextField("Artist Name", text: $feedbackViewModel.artistName)
+                    Picker("Genre", selection: $feedbackViewModel.genre) {
+                        ForEach(feedbackViewModel.genreList, id: \.self) { genre in
+                            Text(genre)
+                                .tag(genre)
+                        }
                     }
-                    
-                    Text("You have 1 free feedback left")
-                        .foregroundStyle(.gray)
-                        .padding(.top, 5)
-                        .frame(maxWidth: .infinity, alignment: .center)
-                        .padding(.bottom)
-                    
-//                    TextEditor(text: $optionalNotes)
-//                        .padding()
-//                        .background(RoundedRectangle(cornerRadius: 8).stroke(Color.gray.opacity(0.5)))
-//                        .padding(.bottom, 10)
+                    .foregroundStyle(.secondaryText)
                     
                 }
-                .padding(.horizontal, 20)
             }
             .navigationBarItems(
                 trailing: Button("Cancel") {
@@ -65,6 +42,21 @@ struct GenerateNewFeedback: View {
             )
             .navigationTitle("Upload Song")
         }
+    }
+    
+    var pickerView: some View {
+        Picker(
+            selection: $feedbackViewModel.songUploadType) {
+                
+                ForEach(SongUploadType.allCases, id: \.self) { item in
+                    Text(item.title)
+                }
+                
+            } label: {
+                
+            }
+            .pickerStyle(SegmentedPickerStyle())
+            .padding()
     }
     
     var buildUploadSong: some View {
@@ -103,6 +95,7 @@ struct GenerateNewFeedback: View {
                 ))
         )
     }
+
 }
 
 #Preview {

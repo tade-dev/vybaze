@@ -71,8 +71,18 @@ struct OnboardingView: View {
 
             Group {
                 
-                AppBtn(text: onboardingV.currentPage == 2 ? "Get Started" : "Next") {
-                    if onboardingV.currentPage < 2 {
+                if onboardingV.currentPage == 2 {
+                    
+                    SocialBTN(
+                        action: {
+                            showOnboarding = false
+                        },
+                        title: "Continue with Apple"
+                    )
+                    .padding(.bottom, 10)
+                    
+                } else {
+                    AppBtn(text: "Next") {
                         withAnimation(.easeInOut) {
                             onboardingV.updateCurrentPage(value: onboardingV.currentPage + 1)
                             animate = false
@@ -80,12 +90,10 @@ struct OnboardingView: View {
                                 animate = true
                             }
                         }
-                    }else {
-                        showOnboarding = false
                     }
+                    .padding(.bottom, 10)
                 }
-                .padding(.bottom, 10)
-
+                
                 HStack {
                     ForEach(onboardingV.onboardingItem.indices, id: \.self) { index in
                         Circle()

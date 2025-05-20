@@ -11,20 +11,17 @@ struct HomeView: View {
         NavigationView {
             ScrollView {
                 VStack(alignment: .leading, spacing: 24) {
-                    
-                    // LatestFeedbackW with animation
+
                     LatestFeedbackW(colorModel: colorModel, progress: 0.3, isHomeView: true)
                         .opacity(animate ? 1 : 0)
                         .offset(y: animate ? 0 : -40)
                         .animation(.spring(response: 0.5, dampingFraction: 0.6), value: animate)
 
-                    // Section header
                     Text("Recent Feedbacks")
                         .font(.appHeadline)
                         .fontWeight(.bold)
                         .foregroundStyle(colorModel.textColor)
 
-                    // Feedback tiles with staggered animation
                     ForEach(0..<3) { index in
                         FeedbackTile(isNavigationLinkActive: $dashboardViewModel.isNavigationLinkActive, details: "Active", colorModel: colorModel)
                             .opacity(animate ? 1 : 0)
@@ -32,7 +29,6 @@ struct HomeView: View {
                             .animation(.spring(response: 0.6, dampingFraction: 0.7).delay(Double(index) * 0.1), value: animate)
                     }
 
-                    // Premium button with bounce-in effect
                     Button(action: {
                         showPremiumSheet.toggle()
                     }, label: {

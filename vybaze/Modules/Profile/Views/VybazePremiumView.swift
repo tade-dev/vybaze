@@ -51,7 +51,7 @@ struct VybazePremiumView: View {
                     
                     buildPremiumTile(icon: "google-docs", title: "Full Feedback History", desc: "Regenerate and compare your past feedbacks overtime")
                     
-                    buildPremiumTile(icon: "pie-chart", title: "Advanced Insights and Breakdown", desc: "Unlock deeper insights on vocals, mixing, arrangement, and emotional tone.")
+                    buildPremiumTile(icon: "microphone", title: "Voice-Note Feedback ", desc: "Record or upload a vocal demo for instant AI lyric & performance coaching.”")
 
                     buildPremiumTile(icon: "sparkling", title: "Early Access to New Features", desc: "Be the first to try out upcoming tools and experimental AI models before public release.")
 
@@ -61,7 +61,7 @@ struct VybazePremiumView: View {
                 .offset(y: animate ? 0 : 20)
                 .animation(.easeOut(duration: 0.6).delay(0.4), value: animate)
                 
-                Text("7 days free trial, then $7.99/month or $69.99/year")
+                Text("7 days free trial, then $4.99/month or $49.99/year")
                     .font(.appBody)
                     .multilineTextAlignment(.center)
                     .fontWeight(.medium)

@@ -17,7 +17,8 @@ class FeedbackViewModel: ObservableObject {
     @Published var artistName: String = ""
     @Published var genre: String = ""
     @Published var optionalNotes: String = ""
-    @Published var genreList: [String] = [
+    let genreList: [String] = [
         "Hip Hop", "Pop", "R&B", "Country", "Afrobeats", "Reggae", "Jazz"
     ]
+    @Published var songUploadType: SongUploadType = .songFile
 }
