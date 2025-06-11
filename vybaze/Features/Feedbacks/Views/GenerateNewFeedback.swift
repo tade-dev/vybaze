@@ -14,24 +14,59 @@ struct GenerateNewFeedback: View {
     @EnvironmentObject var feedbackViewModel: FeedbackViewModel
     
     var body: some View {
-        NavigationView {
             
-            VStack(spacing: 16) {
+        NavigationView(content: {
+            Form {
                 
-                pickerView
+                Section {
+                    pickerView
+                        .listRowBackground(Color.clear)
+                }
                 
-                Form {
-                    
-                    TextField("Song Title", text: $feedbackViewModel.songTitle)
-                    TextField("Artist Name", text: $feedbackViewModel.artistName)
-                    Picker("Genre", selection: $feedbackViewModel.genre) {
-                        ForEach(feedbackViewModel.genreList, id: \.self) { genre in
-                            Text(genre)
-                                .tag(genre)
+                Section {
+                    Group(content: {
+                        if feedbackViewModel.songUploadType == .songURL {
+                            Rectangle()
+                                .frame(width: 200, height: 200)
+                        } else if feedbackViewModel.songUploadType == .songFile {
+                            buildUploadSong
+                        } else if feedbackViewModel.songUploadType == .recording {
+                            Rectangle()
+                                .fill(.red)
+                                .frame(width: 200, height: 200)
                         }
-                    }
-                    .foregroundStyle(.secondaryText)
+                    })
+                    .animation(.spring(.bouncy), value: feedbackViewModel.songUploadType)
+                    .listRowBackground(Color.clear)
                     
+                }
+                
+                Section {
+                    sectionItem(
+                        label: "Song Title",
+                        item: TextField(
+                            "Enter Song Title",
+                            text: $feedbackViewModel.songTitle
+                        ).multilineTextAlignment(.trailing)
+                            .foregroundStyle(.blue)
+                    )
+                    sectionItem(
+                        label: "Artist Name",
+                        item: TextField(
+                            "Enter Artist Name",
+                            text: $feedbackViewModel.artistName
+                        ).multilineTextAlignment(.trailing)
+                            .foregroundStyle(.blue)
+                    )
+                    sectionItem(
+                        item: Picker("Genre" ,selection: $feedbackViewModel.genre, content: {
+                            ForEach(feedbackViewModel.genreList, id: \.self) { option in
+                                Text(option)
+                            }
+                        })
+                        .pickerStyle(.menu)
+                        .multilineTextAlignment(.trailing)
+                    )
                 }
             }
             .navigationBarItems(
@@ -41,6 +76,19 @@ struct GenerateNewFeedback: View {
                 .accentColor(colorModel.primaryColor)
             )
             .navigationTitle("Upload Song")
+        })
+    }
+    
+    func sectionItem(
+        label: String? = nil,
+        item: any View
+    ) -> some View {
+        HStack {
+            if let label {
+                Text(label)
+            }
+            Spacer()
+            AnyView(item)
         }
     }
     
@@ -56,42 +104,26 @@ struct GenerateNewFeedback: View {
                 
             }
             .pickerStyle(SegmentedPickerStyle())
-            .padding()
     }
     
     var buildUploadSong: some View {
         VStack {
-            Image(systemName: "music.note")
+            Image(systemName: "square.and.arrow.up")
                 .font(.largeTitle)
                 .foregroundStyle(colorModel.primaryColor)
-                .padding(.bottom, 5)
+                .padding(.bottom, 3)
             
-            Text("Copy and paste an audio file here, or")
-                .foregroundStyle(.black)
+            Text("Upload a file")
+                .foregroundStyle(.text)
                 .font(.appHeadline)
-                .dynamicTypeSize(.small)
-                .lineLimit(1)
-                .fontWeight(.regular)
-                .frame(maxWidth: .infinity)
-            
-            Text("Browse Files")
-                .foregroundStyle(.white)
-                .font(.appBody)
-                .bold()
-                .padding(.vertical, 10)
-                .padding(.horizontal, 20)
-                .background(
-                    Capsule()
-                        .fill(colorModel.primaryColor)
-                )
-                .padding(.top, 3)
         }
+        .frame(maxWidth: .infinity)
         .padding(.all, 30)
         .background(
-            RoundedRectangle(cornerRadius: 20)
+            RoundedRectangle(cornerRadius: 10)
+                .fill(.gray.opacity(0.2))
                 .stroke(.gray, style: StrokeStyle(
-                    lineWidth: 1,
-                    dash: [4],
+                    lineWidth: 1
                 ))
         )
     }

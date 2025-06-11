@@ -19,20 +19,32 @@ struct AppBtn: View {
     @State var colorModel: ColorModel = ColorModel()
     
     var body: some View {
-        if #available(iOS 26.0, *) {
-            Button(action: action, label: {
-                RoundedRectangle(cornerRadius: 10)
-                    .fill(bgnColor ?? colorModel.primaryColor)
-                    .frame(height: 50)
-                    .frame(maxWidth: .infinity)
-                    .overlay {
-                        Text(text)
-                            .font(.appHeadline)
-                            .bold()
-                            .foregroundStyle(.white)
-                    }
-            })
-        }
+//        if #available(iOS 26.0, *) {
+//            Button(action: action, label: {
+//                RoundedRectangle(cornerRadius: 10)
+//                    .fill(bgnColor ?? colorModel.primaryColor)
+//                    .frame(height: 50)
+//                    .frame(maxWidth: .infinity)
+//                    .overlay {
+//                        Text(text)
+//                            .font(.appHeadline)
+//                            .bold()
+//                            .foregroundStyle(.white)
+//                    }
+//            })
+//        }
+        Button(action: action, label: {
+            RoundedRectangle(cornerRadius: 10)
+                .fill(bgnColor ?? colorModel.primaryColor)
+                .frame(height: 50)
+                .frame(maxWidth: .infinity)
+                .overlay {
+                    Text(text)
+                        .font(.appHeadline)
+                        .bold()
+                        .foregroundStyle(.white)
+                }
+        })
     }
     
 }

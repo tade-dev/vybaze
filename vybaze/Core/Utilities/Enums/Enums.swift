@@ -6,5 +6,5 @@
 //
 
 enum SongUploadType: CaseIterable {
-    case songURL, songFile, voiceMemo
+    case songURL, songFile, recording
 }

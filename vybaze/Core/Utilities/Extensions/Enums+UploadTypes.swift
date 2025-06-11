@@ -13,7 +13,7 @@ extension SongUploadType {
     switch self {
       case .songURL:   return "Song Link"
       case .songFile:  return "Song File"
-      case .voiceMemo: return "Voice Memo"
+      case .recording: return "Recording"
     }
   }
 }
