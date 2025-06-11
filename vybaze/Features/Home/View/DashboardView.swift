@@ -30,19 +30,13 @@ struct DashboardView: View {
                         Text("Feedbacks")
                     }
                 }.tag(1)
-            
-            ProfileView()
-                .tabItem {
-                    VStack {
-                        Image(systemName: "gear")
-                        Text("Settings")
-                    }
-                }.tag(2)
-                
         }
         .accentColor(colorModel.primaryColor)
-        .fullScreenCover(isPresented: $showOnboarding, content: {
+        .sheet(isPresented: $showOnboarding, content: {
             OnboardingView(showOnboarding: $showOnboarding)
+                .presentationDetents([.height(UIScreen.main.bounds.height)])
+                .interactiveDismissDisabled()
+                
         })
         .onAppear {
             showOnboarding = true
@@ -54,4 +48,5 @@ struct DashboardView: View {
     DashboardView()
         .environmentObject(DashboardViewModel())
         .environmentObject(FeedbackViewModel())
+        .environmentObject(ProfileViewModel())
 }

@@ -64,7 +64,7 @@ struct LatestFeedbackW: View {
                 AppBtn(text: "Generate New Feedback") {
                     showSheet.toggle()
                 }
-                .fullScreenCover(isPresented: $showSheet) {
+                .sheet(isPresented: $showSheet) {
                     GenerateNewFeedback()
                 }
             }

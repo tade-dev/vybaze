@@ -11,7 +11,9 @@ import SwiftUI
 struct vybazeApp: App {
     
     @StateObject var feedbackViewModel = FeedbackViewModel()
-    @State var dashboardViewModel = DashboardViewModel()
+    @StateObject var dashboardViewModel = DashboardViewModel()
+    @StateObject var profileVM = ProfileViewModel()
+    @StateObject var settings = VybazeSettings()
     let defaultAppFont = Font.custom("Satoshi-Regular", size: 16)
     
     var body: some Scene {
@@ -19,6 +21,8 @@ struct vybazeApp: App {
             DashboardView()
                 .environmentObject(feedbackViewModel)
                 .environmentObject(dashboardViewModel)
+                .environmentObject(profileVM)
+                .environmentObject(settings)
                 .environment(\.font, defaultAppFont)
         }
     }

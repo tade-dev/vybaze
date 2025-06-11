@@ -19,17 +19,20 @@ struct AppBtn: View {
     @State var colorModel: ColorModel = ColorModel()
     
     var body: some View {
-        Text(text)
-            .font(.appBody)
-            .bold()
-            .foregroundStyle(.white)
-            .frame(maxWidth: .infinity)
-            .frame(height: height ?? 50)
-            .background(
+        if #available(iOS 26.0, *) {
+            Button(action: action, label: {
                 RoundedRectangle(cornerRadius: 10)
                     .fill(bgnColor ?? colorModel.primaryColor)
-            )
-            .onTapGesture(perform: action)
+                    .frame(height: 50)
+                    .frame(maxWidth: .infinity)
+                    .overlay {
+                        Text(text)
+                            .font(.appHeadline)
+                            .bold()
+                            .foregroundStyle(.white)
+                    }
+            })
+        }
     }
     
 }

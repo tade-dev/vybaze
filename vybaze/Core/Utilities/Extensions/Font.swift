@@ -6,9 +6,9 @@
 //
 
 import Foundation
-import SwiftUICore
+import SwiftUI
 
-extension Font {
+public extension Font {
     
     static func regularFont(size: CGFloat) -> Font {
         .custom("Satoshi-Regular", size: size)

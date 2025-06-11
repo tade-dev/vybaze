@@ -11,6 +11,7 @@ struct FeedbackView: View {
     
     var colorModel: ColorModel = ColorModel()
     @EnvironmentObject var feedbackViewModel: FeedbackViewModel
+    @State var showUploadSheet: Bool = false
     
     var body: some View {
         NavigationView {
@@ -18,6 +19,9 @@ struct FeedbackView: View {
                 Section {
                     ForEach(0..<5) { index in
                         FeedbackTile(isNavigationLinkActive: $feedbackViewModel.isNavigationLinkActive, details: "Index \(index)")
+                    }
+                    .onDelete { indexSet in
+                        
                     }
                 } header: {
                     Text("2022-05-10")
@@ -29,18 +33,32 @@ struct FeedbackView: View {
             })
             .listStyle(.plain)
             .navigationTitle("Feedbacks")
+            .toolbar(content: {
+                ToolbarItem(
+                    placement: .topBarTrailing,
+                    content: {
+                        Button {
+                            showUploadSheet.toggle()
+                        } label: {
+                            Image(systemName: "plus")
+                        }
+                        .sheet(isPresented: $showUploadSheet) {
+                            GenerateNewFeedback()
+                        }
+                    }
+                )
+                ToolbarItem(
+                    placement: .topBarTrailing,
+                    content: {
+                        EditButton()
+                    }
+                )
+            })
             .searchable(
                 text: $feedbackViewModel.searchText,
-                placement: .navigationBarDrawer(displayMode: .always),
+                placement: .toolbarPrincipal,
                 prompt: "Search songs..."
             )
-            .navigationBarItems(
-                trailing: EditButton()
-            )
-            .safeAreaInset(
-                edge: .bottom) {
-                    FTA(showSheet: $feedbackViewModel.showSheet, colorModel: colorModel)
-                }
         }
     }
 }

@@ -11,9 +11,11 @@ struct VybazePremiumView: View {
     
     @State private var animate = false
     var colorModel: ColorModel = ColorModel()
+    @Environment(\.dismiss) var dismiss
     
     var body: some View {
-        ScrollView {
+        
+        ScrollView(showsIndicators: false) {
             VStack {
                 Image("vybaze_logo")
                     .resizable()
@@ -81,9 +83,14 @@ struct VybazePremiumView: View {
             }
             .padding(.top, 50)
         }
+        .overlay(alignment: .topTrailing, content: {
+            ConfirmBTN()
+                .padding()
+        })
         .onAppear {
             animate = true
         }
+        
     }
     
     func buildPremiumTile(icon: String, title: String, desc: String) -> some View {

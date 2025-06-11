@@ -6,11 +6,31 @@ struct HomeView: View {
     @EnvironmentObject var dashboardViewModel: DashboardViewModel
     @State var showPremiumSheet: Bool = false
     @State var animate: Bool = false
+    @State var showProfileView = false
 
     var body: some View {
         NavigationView {
-            ScrollView {
+            ScrollView(showsIndicators: false) {
                 VStack(alignment: .leading, spacing: 24) {
+                    
+                    HStack {
+                        Text("Hello Tade!")
+                            .font(.title)
+                            .bold()
+                        Spacer()
+                        Button {
+                            showProfileView.toggle()
+                        } label: {
+                            CircularAsyncImage(
+                                url: "https://picsum.photos/200",
+                                size: 35
+                            )
+                        }
+                        .sheet(isPresented: $showProfileView) {
+                            ProfileView()
+                        }
+                        
+                    }
 
                     LatestFeedbackW(colorModel: colorModel, progress: 0.3, isHomeView: true)
                         .opacity(animate ? 1 : 0)
@@ -56,8 +76,7 @@ struct HomeView: View {
                 }
                 .padding()
             }
-            .navigationTitle("Hello, Tade!")
-            .navigationBarTitleDisplayMode(.large)
+            .navigationBarTitleDisplayMode(.inline)
             .sheet(isPresented: $showPremiumSheet) {
                 VybazePremiumView()
             }
@@ -71,4 +90,5 @@ struct HomeView: View {
 #Preview {
     HomeView()
         .environmentObject(DashboardViewModel())
+        .environmentObject(ProfileViewModel())
 }

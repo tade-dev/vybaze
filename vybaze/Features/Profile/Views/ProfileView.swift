@@ -13,6 +13,7 @@ struct ProfileView: View {
     @State var isFeedbackUpdateOn: Bool = false
     @State var showPremiumPopUp: Bool = false
     var colorModel: ColorModel = ColorModel()
+    @Environment(\.dismiss) private var dismiss
     
     
     var body: some View {
@@ -45,11 +46,11 @@ struct ProfileView: View {
 
                     Section {
                         Toggle(isOn: $isFeedbackUpdateOn) {
-                            Text("Feedback Updates")
+                            Text("Dark Mode")
                         }
                         .tint(colorModel.primaryColor)
                     } header: {
-                        Text("Notifications")
+                        Text("App")
                             .textCase(.none)
                     }
                     
@@ -77,6 +78,13 @@ struct ProfileView: View {
                 })
             }
             .navigationTitle("Settings")
+            .navigationBarItems(
+                trailing: Button("Cancel") {
+                    dismiss()
+                }
+                    .accentColor(colorModel.primaryColor)
+            )
+            .navigationBarTitleDisplayMode(.inline)
         }
     }
     
@@ -85,21 +93,8 @@ struct ProfileView: View {
             EditProfileView()
         }) {
             HStack {
-                AsyncImage(url: URL(string: "https://picsum.photos/200"), content: { image in
-                    
-                    image
-                        .resizable()
-                        .frame(width: 50, height: 50)
-                        .clipped()
-                        .clipShape(.circle)
-                    
-                }, placeholder: {
-                    ProgressView()
-                })
-                
-                    .frame(width: 50, height: 50)
-                    .clipped()
-                    .clipShape(.circle)
+
+                CircularAsyncImage(url: "https://picsum.photos/200")
                 
                 VStack(alignment: .leading) {
                     Text("Akintade Oluwaseun")
@@ -119,4 +114,5 @@ struct ProfileView: View {
 
 #Preview {
     ProfileView()
+        .environmentObject(ProfileViewModel())
 }
