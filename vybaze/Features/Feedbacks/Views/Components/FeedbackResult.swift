@@ -16,31 +16,11 @@ struct FeedbackResultW: View {
     var body: some View {
         HStack {
             
-            AsyncImage(url: imageUrl) { phase in
-                switch phase {
-                    
-                case .empty:
-                    
-                    ProgressView()
-                        .frame(width: 100, height: 100)
-                    
-                case .success(let image):
-                    image
-                        .resizable()
-                        .frame(width: 100, height: 100)
-                        .cornerRadius(10)
-                    
-                case .failure(_):
-                    Image(systemName: "photo")
-                        .foregroundStyle(.gray)
-                        .frame(width: 100, height: 100)
-                    
-                @unknown default:
-                    Image(systemName: "photos")
-                        .foregroundStyle(.gray)
-                        .frame(width: 100, height: 100)
-                }
-            }
+            CircularAsyncImage(
+                url: imageUrl?.absoluteString ?? "",
+                size: 100,
+                cornerRadius: 10
+            )
             
             VStack(alignment: .leading) {
                 Text("Reflections")

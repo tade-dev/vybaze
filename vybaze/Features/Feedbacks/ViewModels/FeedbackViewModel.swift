@@ -15,6 +15,7 @@ class FeedbackViewModel: ObservableObject {
     @Published var searchText: String = ""
     @Published var songTitle: String = ""
     @Published var artistName: String = ""
+    @Published var songUrl: String = ""
     @Published var genre: String = ""
     @Published var optionalNotes: String = ""
     let genreList: [String] = [

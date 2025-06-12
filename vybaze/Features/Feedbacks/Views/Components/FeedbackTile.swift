@@ -19,8 +19,11 @@ struct FeedbackTile: View {
         } label: {
             HStack() {
                 
-                cacheImage(url: "https://picsum.photos/200")
-                
+                CircularAsyncImage(
+                    url: "https://picsum.photos/200",
+                    size: 50,
+                    cornerRadius: 5
+                )
                 
                 VStack(alignment: .leading, spacing: 8) {
                     Text("Toxic Love")
