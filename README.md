@@ -1,4 +1,4 @@
-# Vybaze
+# Vybaze - 🚧
 
 <div align="center">
   <img src="logo.png" alt="Vybaze Logo" width="150">
